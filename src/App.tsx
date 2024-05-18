@@ -4,6 +4,7 @@ import useAppSelector from "./hooks/useAppSelector"
 import { QuizStatus } from "./types/quiz"
 import QuizStart from "./components/QuizStart"
 import QuizQuestion from "./components/QuizQuestion"
+import QuizResult from "./components/QuizResult"
 
 const PageWrapper = styled.div`
     min-height: 100vh;
@@ -30,7 +31,9 @@ const App: FC = () => {
     )
   }
   return (
-    <div>Quiz is finished</div>
+    <PageWrapper>
+      <QuizResult />
+    </PageWrapper>
   )
 }
 

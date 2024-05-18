@@ -64,7 +64,8 @@ const quizSlice = createSlice({
         },
         changeCurrentQuestionIndex: (state, action: PayloadAction<number>) => {
             state.currentQuestionIndex = action.payload
-        }
+        },
+        restartQuiz: () => initialState
     },
     extraReducers: (builder) => {
         builder.addCase(fetchQuestions.pending, (state) => {
@@ -88,7 +89,8 @@ export const {
     changeQuizStatus,
     changeQuestionCount,
     changeCurrentQuestionIndex,
-    checkAnswer
+    checkAnswer,
+    restartQuiz
 } = quizSlice.actions
 
 export default quizSlice.reducer
