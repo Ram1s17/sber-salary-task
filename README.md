@@ -1,30 +1,61 @@
-# React + TypeScript + Vite
+## Тестовое задание - Junior Frontend-разработчик в команду Сбера
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Как запустить проект
 
-Currently, two official plugins are available:
+1. Склонировать репозиторий
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+git clone https://github.com/Ram1s17/sber-salary-task.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Установка зависимостей:
+
+```bash
+npm install
+```
+
+3. Для запуска в режиме разработки выполнить:
+
+```bash
+npm run dev
+```
+
+4. Для запуска unit-тестов выполнить:
+
+```bash
+npm run test
+```
+
+## Описание
+
+Создано React-приложение для прохождения викторины. 
+
+Пользователь выбирает количество вопросов (от 5 до 20). Вопросы отображаются по одному, каждый следующий вопрос появляется после ответа на предыдущий.
+
+Правильный вариант ответа может быть один или несколько. Вопросы обладают атрибутом "сложность" со значениями - Easy, Medium, Hard. 
+
+На финальном шаге отображаются все результаты, используется градация по уровням сложности.
+
+
+#### Данные
+
+Данные для викторины берутся из API:
+
+https://quizapi.io/api/v1
+
+Используется запрос вида:
+
+https://quizapi.io/api/v1/questions?limit=5
+
+#### При разработке использованы:
+
+- TypeScript		
+- React
+- Redux Toolkit
+- Ant Design
+- styled-components
+- axios
+- jest
+- eslint
+- Vite
+
