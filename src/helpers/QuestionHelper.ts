@@ -50,7 +50,10 @@ export default class QuestionHelper {
     }
 
     static checkAnswer(userAnswers: string[], correctAnswers: Record<string, boolean>) {
-        return userAnswers
-            .every(answer => correctAnswers[answer])
+        const allUserAnswersCorrect = userAnswers.every(answer => correctAnswers[answer])
+        const allCorrectAnswersSelected = Object.keys(correctAnswers)
+            .filter(key => correctAnswers[key])
+            .every(correctAnswer => userAnswers.includes(correctAnswer))
+        return allUserAnswersCorrect && allCorrectAnswersSelected;
     }
 }
