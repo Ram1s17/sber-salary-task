@@ -3,10 +3,12 @@ import { QuizStatus } from "../../types/quiz"
 
 interface QuizState {
     status: QuizStatus;
+    questionCount: number;
 }
 
 const initialState: QuizState = {
-    status: QuizStatus.START
+    status: QuizStatus.START,
+    questionCount: 5
 }
 
 const quizSlice = createSlice({
@@ -15,10 +17,16 @@ const quizSlice = createSlice({
     reducers: {
         changeQuizStatus: (state, action: PayloadAction<QuizStatus>) => {
             state.status = action.payload
+        },
+        changeQuestionCount: (state, action: PayloadAction<number>) => {
+            state.questionCount = action.payload
         }
     }
 })
 
-export const { changeQuizStatus } = quizSlice.actions
+export const {
+    changeQuizStatus,
+    changeQuestionCount
+} = quizSlice.actions
 
 export default quizSlice.reducer
