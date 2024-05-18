@@ -2,6 +2,7 @@ import { FC } from "react"
 import useAppSelector from "./hooks/useAppSelector"
 import { QuizStatus } from "./types/quiz"
 import QuizStart from "./components/QuizStart"
+import QuizQuestion from "./components/QuizQuestion"
 
 
 const App: FC = () => {
@@ -11,7 +12,7 @@ const App: FC = () => {
     return <QuizStart />
   }
   else if (status === QuizStatus.PROGRESS) {
-    return <div>Quiz is in progress</div>
+    return <QuizQuestion />
   }
   return (
     <div>Quiz is finished</div>
