@@ -1,6 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { Question, QuizStatus } from "../../types/quiz"
+import { Difficulty, Question, QuizStatus } from "../../types/quiz"
 import { fetchQuestions } from "./actionCreators"
+import QuestionHelper from "../../helpers/QuestionHelper"
+
+interface Result {
+    [key: string]: {
+        correct: number;
+        total: number;
+    }
+}
 
 interface QuizState {
     status: QuizStatus;
@@ -8,6 +16,8 @@ interface QuizState {
     isLoading: boolean;
     error: string;
     questions: Question[];
+    currentQuestionIndex: number;
+    result: Result;
 }
 
 const initialState: QuizState = {
@@ -15,7 +25,22 @@ const initialState: QuizState = {
     questionCount: 5,
     isLoading: false,
     error: '',
-    questions: []
+    questions: [],
+    currentQuestionIndex: 0,
+    result: {
+        Easy: {
+            correct: 0,
+            total: 0
+        },
+        Medium: {
+            correct: 0,
+            total: 0
+        },
+        Hard: {
+            correct: 0,
+            total: 0
+        }
+    }
 }
 
 const quizSlice = createSlice({
@@ -27,6 +52,18 @@ const quizSlice = createSlice({
         },
         changeQuestionCount: (state, action: PayloadAction<number>) => {
             state.questionCount = action.payload
+        },
+        checkAnswer: (state, action: PayloadAction<{
+            difficulty: Difficulty,
+            userAnswers: string[],
+            correctAnswers: Record<string, boolean>
+        }>) => {
+            if (QuestionHelper.checkAnswer(action.payload.userAnswers, action.payload.correctAnswers)) {
+                state.result[action.payload.difficulty].correct += 1
+            }
+        },
+        changeCurrentQuestionIndex: (state, action: PayloadAction<number>) => {
+            state.currentQuestionIndex = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -36,7 +73,9 @@ const quizSlice = createSlice({
         builder.addCase(fetchQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
             state.isLoading = false
             state.error = ''
-            state.questions = action.payload
+            state.questions = QuestionHelper.getProcessedQuestions(action.payload)
+            state.result = QuestionHelper.getInitialResult(action.payload)
+
         })
         builder.addCase(fetchQuestions.rejected, (state, action: PayloadAction<string | undefined>) => {
             state.isLoading = false
@@ -47,7 +86,9 @@ const quizSlice = createSlice({
 
 export const {
     changeQuizStatus,
-    changeQuestionCount
+    changeQuestionCount,
+    changeCurrentQuestionIndex,
+    checkAnswer
 } = quizSlice.actions
 
 export default quizSlice.reducer

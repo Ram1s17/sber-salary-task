@@ -10,7 +10,7 @@ export const fetchQuestions = createAsyncThunk<Question[], number, { rejectValue
             if (!Array.isArray(response.data)) {
                 throw new Error('Incorrect format of the received data')
             }
-            return response.data
+            return JSON.parse(JSON.stringify(response.data), (_, v) => v === "true" ? true : v === "false" ? false : v)
         } catch (e) {
             if (e instanceof Error) {
                 return rejectWithValue(e.message)

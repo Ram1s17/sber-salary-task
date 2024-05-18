@@ -6,13 +6,6 @@ import useAppDispatch from "../hooks/useAppDispatch"
 import { changeQuestionCount, changeQuizStatus } from "../store/reducers/quizReducer"
 import { QuizStatus } from "../types/quiz"
 
-const PageWrapper = styled.div`
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
 const QuizStartBlock = styled.div`
     background: #CBFFE4;
     padding: 10px 15px;
@@ -31,7 +24,6 @@ const StartButton = styled(Button)`
     border: 1px solid #000;
 `
 
-
 const QuizStart: FC = () => {
     const { questionCount } = useAppSelector(state => state.quiz)
     const dispatch = useAppDispatch()
@@ -46,28 +38,26 @@ const QuizStart: FC = () => {
     }
 
     return (
-        <PageWrapper>
-            <QuizStartBlock>
-                <Space
-                    direction="vertical"
-                    size="middle"
-                    align="center"
-                >
-                    <Title>
-                        Select the number of questions:
-                    </Title>
-                    <InputNumber
-                        min={5}
-                        max={20}
-                        value={questionCount}
-                        onChange={onChange}
-                    />
-                    <StartButton onClick={() => dispatch(changeQuizStatus(QuizStatus.PROGRESS))}>
-                        Start quiz
-                    </StartButton>
-                </Space>
-            </QuizStartBlock>
-        </PageWrapper>
+        <QuizStartBlock>
+            <Space
+                direction="vertical"
+                size="middle"
+                align="center"
+            >
+                <Title>
+                    Select the number of questions:
+                </Title>
+                <InputNumber
+                    min={5}
+                    max={20}
+                    value={questionCount}
+                    onChange={onChange}
+                />
+                <StartButton onClick={() => dispatch(changeQuizStatus(QuizStatus.PROGRESS))}>
+                    Start quiz
+                </StartButton>
+            </Space>
+        </QuizStartBlock>
     )
 }
 
