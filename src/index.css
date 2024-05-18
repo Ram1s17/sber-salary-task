@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Benzin';
+    src: url('./assets/fonts/Benzin-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Benzin';
+    src: url('./assets/fonts/Benzin-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
